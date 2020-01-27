@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "Is it morning now?"
+read answer
+
+if [ "$answer" = "yes" ]
+then
+	echo "it is morning"
+elif [ "$answer" = "no" ]
+then
+	echo "it is not morning"
+else
+	echo "invalid input."
+	exit 1
+fi
+
+exit 0

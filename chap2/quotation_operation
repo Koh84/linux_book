@@ -1,0 +1,19 @@
+#!/bin/sh
+
+myvar="Hi there"
+
+
+echo $myvar
+
+echo "$myvar"
+#no substitution takes place
+echo '$myvar'
+#remove the special meaning of $
+echo \$myvar
+
+echo Enter some text
+read myvar
+
+echo '$myvar' now equals $myvar
+exit 0
+

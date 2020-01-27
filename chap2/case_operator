@@ -1,0 +1,14 @@
+#!/bin/sh
+
+echo "is it morning?"
+read time
+
+case "$time" in
+	yes) echo "morning";;
+	no) echo "afternoon";;
+	y) echo "morning";;
+	n) echo "afternoon";;
+	*) echo "invalid";;
+esac
+
+exit 0

@@ -1,0 +1,9 @@
+book@book-virtual-machine:/work/beginning_linux/chap2$ for file in *
+> do
+> if grep -l such $file
+> then
+> more $file
+> fi
+> done
+b.txt
+

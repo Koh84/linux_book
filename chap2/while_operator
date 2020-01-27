@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "enter password"
+read pass
+
+while [ "$pass" != "secret" ]
+do 
+	echo "try again"
+	read pass
+done
+exit 0
