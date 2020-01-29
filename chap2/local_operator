@@ -1,0 +1,16 @@
+#!/bin/sh
+
+sample="test 1"
+
+foo(){
+	local sample="notest 1"
+	echo "in function foo"
+	echo $sample
+}
+
+foo
+
+echo "script end"
+echo $sample
+
+exit 0

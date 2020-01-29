@@ -1,0 +1,10 @@
+#!/bin/sh
+
+foo="hello"
+export bar="eee"
+
+export2
+
+
+
+

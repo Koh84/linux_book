@@ -1,0 +1,20 @@
+#!/bin/sh
+
+echo "is it morning?"
+read time
+
+case "$time" in
+	yes | y | YES | Yes ) 
+		echo "morning"
+		echo "bright"
+		;;
+	no | n | NO | No | [nN]* ) 
+		echo "afternoon"
+		;;
+	*) 
+		echo "invalid"
+		exit 1		
+		;;
+esac
+
+exit 0

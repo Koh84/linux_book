@@ -1,0 +1,13 @@
+#!/bin/sh
+
+gdialog --title "Confirm" --yesno "Are you willing to take part?" 9 18
+if [ $? != 0 ] ; then
+	gdialog --infobox "Thank you anyway" 5 20
+	sleep 2
+	gdialog --clear
+	exit 0
+else
+	gdialog --title "Questionaire" --inputbox "Please enter your name" 9 30 2>_1.txt
+	Q_NAME=$(cat _1.txt)
+	echo $Q_NAME
+fi
