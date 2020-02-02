@@ -39,28 +39,28 @@ int main()
 	fwrite(&record,sizeof(record),1,fp);
 	fclose(fp);
 
-	f = open("records.data", O_RDWR);
+	f = open("records.dat", O_RDWR);
 	mapped = (RECORD *)mmap(0,NRECORDS*sizeof(record),PROT_READ|PROT_WRITE,MAP_SHARED,f,0);
 
 	printf("Test 1\n");
-/*	for(i = 0; i<NRECORDS; i++)
+	for(i = 0; i<NRECORDS; i++)
 	{
 		printf("mapped[%d].integer = %d\n", i, mapped[i].integer);
 		printf("mapped[%d].string = %s", i, mapped[i].string);
 	}
-*/
+
 	
 	mapped[43].integer = 243;
 	sprintf(mapped[43].string, "RECORD-%d",mapped[43].integer);
 
 	msync((void *)mapped, NRECORDS*sizeof(record), MS_ASYNC);
 	printf("Test 2\n");
-/*	for(i = 0; i<NRECORDS; i++)
+	for(i = 0; i<NRECORDS; i++)
 	{
 		printf("mapped[%d].integer = %d\n", i, mapped[i].integer);
 		printf("mapped[%d].string = %s", i, mapped[i].string);
 	}
-*/
+
 	munmap((void *)mapped, NRECORDS*sizeof(record));
 	close(f);
 	
