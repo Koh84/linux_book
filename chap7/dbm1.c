@@ -1,14 +1,16 @@
-//install libgdbm-dev package
+//linuxfromscratch.org/lfs/view/development/chapter06/gdbm.html
+//gcc -o dbm1 -I/usr/include -L/usr/lib dbm1.c -lgdbm -lgdbm_compat
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
-//#include <ndbm.h>
+//#include <ndbm.h> //work
+//#include <gdbm.h> //don't work
 // On some systems you need to replace the above with
-#include <gdbm-ndbm.h>
+#include <gdbm-ndbm.h> //work
 
 #include <string.h>
-#define TEST_DB_FILE “/tmp/dbm1_test”
+#define TEST_DB_FILE "/tmp/dbm1_test"
 #define ITEMS_USED 3
 
 struct test_data {
@@ -56,6 +58,8 @@ int main()
 	for (i = 0; i < ITEMS_USED; i++) 
 	{
 		sprintf(key_to_use, "%c%c%d", items_to_store[i].misc_chars[0], items_to_store[i].more_chars[0], items_to_store[i].any_integer);
+
+		//printf("key is %c%c%d", items_to_store[i].misc_chars[0], items_to_store[i].more_chars[0], items_to_store[i].any_integer);
 		key_datum.dptr = (void *)key_to_use;
 		key_datum.dsize = strlen(key_to_use);
 		data_datum.dptr = (void *)&items_to_store[i];
@@ -65,13 +69,14 @@ int main()
 	
 		if (result != 0) 
 		{
-			fprintf(stderr, “dbm_store failed on key %s\n”, key_to_use);
+			fprintf(stderr, "dbm_store failed on key %s\n", key_to_use);
 			exit(2);
 		}
 	}
 	
 	//see if you can retrieve the data from database
 	sprintf(key_to_use, "bu%d", 13);
+	//sprintf(key_to_use, "bu"); //This key won't work
 	key_datum.dptr = key_to_use;
 	key_datum.dsize = strlen(key_to_use);
 	data_datum = dbm_fetch(dbm_ptr, key_datum);
@@ -87,7 +92,7 @@ int main()
 	}
 	else 
 	{
-		printf(“No data found for key %s\n”, key_to_use);
+		printf("No data found for key %s\n", key_to_use);
 	}
 
 	dbm_close(dbm_ptr);
